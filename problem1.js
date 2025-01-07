@@ -1,17 +1,18 @@
+// function to group the people based on the role.
 function groupBasedRole(data) {
-    const allGroupBasedRole = {};
-    let fullName;
 
-    for(let details of data.data) {
-        if(allGroupBasedRole[details.hr[0]] === undefined) {
-            fullName = details.name[0] + " " +details.name[1];
-            allGroupBasedRole[details.hr[0]] = [(fullName)];
+    // returning an object based on the role.
+    return data.data.reduce((accumlater, user) => {
+        let role = user["hr"][0];
+        let fullName = `${user["name"][0]} ${user["name"][1]}`;
+
+        // check if key already exits or not.
+        if (!accumlater[role]) {
+            accumlater[role] = [fullName];
         } else {
-            fullName = details.name[0] + " " +details.name[1];
-            allGroupBasedRole[details.hr[0]].push(fullName);
+            accumlater[role].push(fullName);
         }
-    }
-    return allGroupBasedRole;
+        return accumlater;
+    }, {});
 }
-
 module.exports = groupBasedRole;
