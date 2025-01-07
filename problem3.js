@@ -1,11 +1,10 @@
+//  function to get all users full name.
 function getAllFullName(data) {
-    let allFullNames = [];
 
-    for(let details of data.data){
-        let fullName = details.name[0] + " " + details.name[1];
-        allFullNames.push(fullName);
-    }
-    return allFullNames;
+    // returning a array with all users full name.
+    return data.data.reduce((accumlater, user) => {
+        accumlater.push(`${user["name"][0]} ${user["name"][1]}`)
+        return accumlater
+    }, []);
 }
-
 module.exports = getAllFullName;
